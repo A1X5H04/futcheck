@@ -1,8 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  getFormationPositions,
-  SQUAD_WIZARD_FORMATIONS,
-} from "../components/utils/formations";
+import { getFormationPositions } from "../components/utils/formations";
 import {
   calculateChemistry,
   calculateRating,

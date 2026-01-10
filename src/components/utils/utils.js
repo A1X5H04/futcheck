@@ -90,8 +90,8 @@ export const fillZeros = (hexcode) => {
   return hexcode;
 };
 
-const BASE_URL = process.env.REACT_APP_CDN_BASE_URL;
-const EA_BASE_URL = process.env.REACT_APP_EA_BASE_URL;
+const BASE_URL = import.meta.env.VITE_CDN_BASE_URL;
+const EA_BASE_URL = import.meta.env.VITE_EA_BASE_URL;
 
 export const buildChallengeImageUrl = (challengeImageId) => {
   return `${EA_BASE_URL}/sbc/companion/challenges/images/sbc_challenge_image_${challengeImageId}.png`;
@@ -204,7 +204,7 @@ export const useUserInfo = () => {
             const user = await fetchUserInfoBearer(access);
             dispatch(setUserInfo(user));
             return;
-          } catch {}
+          } catch { }
         }
       }
     }
@@ -218,7 +218,7 @@ export const useUserInfo = () => {
         if (refresh) setCookie("refresh_token", refresh);
         dispatch(setUserInfo(user));
         return;
-      } catch {}
+      } catch { }
     }
 
     dispatch(removeUserInfo());
@@ -1146,15 +1146,15 @@ export const processLevels = (levels) => {
     // Process objectives if any
     const objectivesData = level.objectives
       ? level.objectives.map((objective) => ({
-          name: objective.name,
-          isWeb: objective.isWeb,
-          gameArea: objective.gameArea,
-          priority: objective.priority,
-          multiplier: objective.multiplier,
-          description: objective.description,
-          objectiveId: objective.objectiveId,
-          takeMeThereLink: objective.takeMeThereLink,
-        }))
+        name: objective.name,
+        isWeb: objective.isWeb,
+        gameArea: objective.gameArea,
+        priority: objective.priority,
+        multiplier: objective.multiplier,
+        description: objective.description,
+        objectiveId: objective.objectiveId,
+        takeMeThereLink: objective.takeMeThereLink,
+      }))
       : [];
 
     return {

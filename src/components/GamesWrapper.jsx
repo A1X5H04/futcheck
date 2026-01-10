@@ -1,6 +1,6 @@
 import React from "react";
 import GameModes from "./games/GameModes";
-const GamesWrapper = ({ children }) => {
+const GamesWrapper = () => {
   return (
     <div>
       {" "}
