@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {
   buildDynamicUrl,
   getTimeUntilExpiration,
-  setidUntilExpiration,
+  // setidUntilExpiration,
   timeAgo,
 } from "../utils/utils";
 import { Link } from "react-router-dom";
@@ -40,16 +40,15 @@ const NewSbcCard = ({ data }) => {
 
             {/* Description with toggle */}
             <p
-              className={`text-[#B0B0B0] pt-3 max-h-20 md:max-h-36 overflow-y-auto text-start cursor-pointer ${
-                isMobile ? "ellipsis" : ""
-              }`}
+              className={`text-[#B0B0B0] pt-3 max-h-20 md:max-h-36 overflow-y-auto text-start cursor-pointer ${isMobile ? "ellipsis" : ""
+                }`}
               onClick={() => setExpanded(true)}
             >
               {expanded || !isMobile
                 ? description
                 : description.length > 50
-                ? `${description.slice(0, 50)}...`
-                : description}
+                  ? `${description.slice(0, 50)}...`
+                  : description}
             </p>
           </div>
           {/* Stats Section */}
@@ -64,8 +63,8 @@ const NewSbcCard = ({ data }) => {
                 {endTime == 0
                   ? "No Expiry"
                   : !endTimeStamp
-                  ? "Expired"
-                  : getTimeUntilExpiration(endTimeStamp)}
+                    ? "Expired"
+                    : getTimeUntilExpiration(endTimeStamp)}
               </span>
             </div>
             <div className="flex flex-col">

@@ -3,7 +3,6 @@ import React, { useCallback, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import { createPremiumOrder, captureOrder } from "../../api/apiService";
-import { toHaveStyle } from "@testing-library/jest-dom/matchers";
 import { toast } from "react-toastify";
 import { useUserInfo } from "../utils/utils";
 
@@ -35,7 +34,7 @@ export default function PremiumModal({ onClose }) {
           // refresh user info so UI updates immediately
           try {
             await fetchUser();
-          } catch {}
+          } catch { }
           setTimeout(() => {
             onClose();
           }, 300);
@@ -99,7 +98,7 @@ export default function PremiumModal({ onClose }) {
             createOrder={createOrder}
             onApprove={onApprove}
             onError={onError}
-            // fundingSource={undefined}
+          // fundingSource={undefined}
           />
         </div>
       </div>
