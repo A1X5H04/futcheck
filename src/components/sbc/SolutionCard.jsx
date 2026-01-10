@@ -45,7 +45,7 @@ const SolutionCard = ({ active, solution }) => {
             <p className="font-thin w-16 text-left"> Leagues</p>
             <div className="grid grid-cols-3 gap-3">
               {top_leagues.slice(0, 3)?.map((league) => {
-                const league_url = buildDynamicUrl('league',league[0])
+                const league_url = buildDynamicUrl("league", league[0], "dark");
                 return <img className="w-10 rounded-md" src={league_url} />;
               })}
             </div>
@@ -54,7 +54,7 @@ const SolutionCard = ({ active, solution }) => {
             <p className="font-thin w-16 text-left"> Nations</p>
             <div className="grid grid-cols-3 gap-3">
               {top_nations.slice(0, 3).map((nation) => {
-                const nation_url = buildDynamicUrl('nation',nation[0])
+                const nation_url = buildDynamicUrl("nation", nation[0], "dark");
                 return <img className="w-10 rounded-md" src={nation_url} />;
               })}
             </div>
@@ -63,7 +63,7 @@ const SolutionCard = ({ active, solution }) => {
             <p className="font-thin w-16 text-left"> Clubs</p>
             <div className="grid grid-cols-3 gap-3">
               {top_clubs.slice(0, 3).map((club) => {
-                const club_url = buildDynamicUrl('club',club[0])
+                const club_url = buildDynamicUrl("club", club[0], "dark");
                 return <img className="w-10 rounded-md" src={club_url} />;
               })}
             </div>

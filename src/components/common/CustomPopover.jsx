@@ -79,14 +79,14 @@ const PopoverItems = ({ closePanel, player }) => {
           <img
             src={
               isIcon(player) || isHero(player)
-                ? buildDynamicUrl("league", leagueid)
-                : buildDynamicUrl("club", teamid)
+                ? buildDynamicUrl("league", leagueid, "dark")
+                : buildDynamicUrl("club", teamid, "dark")
             }
             width={28}
             className="h-6"
           />
           <img
-            src={buildDynamicUrl("nation", nation)}
+            src={buildDynamicUrl("nation", nation, "dark")}
             width={28}
             className="h-5"
           />

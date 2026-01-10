@@ -8,14 +8,94 @@ import {
   calculateFaceStats,
   fillZeros,
   buildRarityUrl,
-  getTextColor,
-  getBgColor,
 } from "../utils/utils";
 import CoinsImg from "../../assets/coins.png";
 import { IN_GAME_STATS, WORK_RATE } from "../utils/constants";
-import { getTraitIcon } from "../utils/traitsvg";
 import classNames from "classnames";
 import { applyChemStyle } from "../PlayerViewCards/StatsCard";
+import PlaystyleIcon from "./PlaystyleIcon";
+
+const getColorMappings = (rarityObject, rating) => {
+  if (
+    !rarityObject ||
+    !rarityObject.colors ||
+    !Array.isArray(rarityObject.colors) ||
+    rarityObject.colors.length === 0
+  ) {
+    return {
+      attributeValues: "#ffffff",
+      background: "#ffffff",
+      dividers: "#ffffff",
+      footer: "#ffffff",
+      header: "#ffffff",
+      name: "#ffffff",
+      playStyleIcon: "#ffffff",
+      playStyleText: "#ffffff",
+    };
+  }
+
+  const { colors, lg_color_indices, levels } = rarityObject;
+  let level_no = levels || 0;
+
+  // Determine level based on rating if levels > 0
+  if (level_no > 0) {
+    if (rating >= 75) {
+      level_no = 3;
+    } else if (rating >= 65) {
+      level_no = 2;
+    } else {
+      level_no = 1;
+    }
+  }
+
+  // Get the appropriate colors based on level
+  let availableColors = colors;
+
+  if (levels > 0) {
+    // If there are levels, slice the colors array based on the current level
+    // Assuming each level gets 3 colors from a 9-color array
+    const colorsPerLevel = Math.floor(colors.length / levels);
+    const startIndex = (level_no - 1) * colorsPerLevel;
+    const endIndex = Math.min(startIndex + colorsPerLevel, colors.length);
+    availableColors = colors.slice(startIndex, endIndex);
+  }
+
+  // Create 8-slot array of hex colors using lg_color_indices
+  let colorSlots;
+  if (
+    lg_color_indices &&
+    Array.isArray(lg_color_indices) &&
+    lg_color_indices.length >= 8
+  ) {
+    // Map the first 8 indices to actual colors from availableColors
+    colorSlots = lg_color_indices.slice(0, 8).map((index) => {
+      // lg_color_indices is 1-based, so subtract 1 for 0-based array access
+      const colorIndex = index - 1;
+      if (colorIndex >= 0 && colorIndex < availableColors.length) {
+        return fillZeros(availableColors[colorIndex]);
+      }
+      // If index is out of bounds for availableColors, cycle through them
+      const cyclicIndex = colorIndex % availableColors.length;
+      return fillZeros(availableColors[cyclicIndex]);
+    });
+  }
+
+  const at = (index) => {
+    return colorSlots[index] || "#ffffff";
+  };
+
+  return {
+    header: at(0), // index 0
+    name: at(1), // index 1
+    attributeValues: at(2), // index 2
+    footer: at(3), // index 3
+    playStyleIcon: at(4), // index 4
+    playStyleText: at(5), // index 5
+    background: at(6), // index 6
+    dividers: at(7), // index 7
+    useLightCrest: lg_color_indices[8],
+  };
+};
 
 const AttributeDisplay = ({
   label,
@@ -142,24 +222,28 @@ const PlayerCard = ({
       })
     : "";
 
-  const textColor = rarityObject
-    ? getTextColor({
-        colors: rarityObject.colors,
-        rating: rating,
-        level: rarityObject.levels || 0,
-        indices: rarityObject.lg_color_indices || [],
-      })
-    : "#ffffff";
+  // Get color mappings using the new system
+  const colorMappings = rarityObject
+    ? getColorMappings(rarityObject, rating)
+    : {
+        attributeValues: "#ffffff",
+        background: "#ffffff",
+        dividers: "#ffffff",
+        footer: "#ffffff",
+        header: "#ffffff",
+        name: "#ffffff",
+        playStyleIcon: "#ffffff",
+        playStyleText: "#ffffff",
+      };
 
-  const bgColor = rarityObject
-    ? getBgColor({
-        colors: rarityObject.colors,
-        rating: rating,
-        level: rarityObject.levels || 0,
-        indices: rarityObject.lg_color_indices || [],
-      })
-    : "#ffffff";
-
+  // Use the appropriate colors from mappings
+  const textColor = colorMappings.name; // Main text color for player name
+  const bgColor = colorMappings.background; // Background color
+  const attributeColor = colorMappings.attributeValues; // Color for attribute values
+  const headerColor = colorMappings.header; // Color for rating/position
+  const playStyleIconColor = colorMappings.playStyleIcon; // Color for playstyle icons
+  const footerColor = colorMappings.footer; // Color for footer elements (nation, league, club)
+  const useLightCrest = colorMappings.useLightCrest == 1 ? "light" : "dark";
   useEffect(() => {
     const cardElement = cardRef.current;
 
@@ -251,6 +335,10 @@ const PlayerCard = ({
             color: textColor,
             "--fill-color": bgColor,
             "--text-color": textColor,
+            "--attribute-color": attributeColor,
+            "--header-color": headerColor,
+            "--playstyle-icon-color": playStyleIconColor,
+            "--footer-color": footerColor,
           }}
           className="block relative h-full "
         >
@@ -278,7 +366,10 @@ const PlayerCard = ({
             alt="Player"
           />
           <div
-            style={{ fontSize: playerNameFontSize }}
+            style={{
+              fontSize: playerNameFontSize,
+              color: textColor, // Use name color from mapping
+            }}
             className={classNames(
               "font-bold leading-none top-[67.5%] absolute left-[50%] transform -translate-x-1/2 -translate-y-1/2 w-[75.2%] whitespace-nowrap overflow-hidden text-overflow-ellipsis text-center"
             )}
@@ -313,6 +404,7 @@ const PlayerCard = ({
           {!isMini && (
             <div
               className={`flex flex-row absolute top-[71%] w-[68.8%] gap-1 font-bold left-1/2 transform -translate-x-1/2 justify-between`}
+              style={{ color: attributeColor }} // Use attribute color from mapping
             >
               {attributes.map((attribute, index) => (
                 <AttributeDisplay
@@ -335,6 +427,7 @@ const PlayerCard = ({
               "absolute transform -translate-x-1/2 font-bold text-center flex flex-col gap-0.5 top-[20.2%]",
               isMini ? "left-[24.8%]" : "left-[24.8%]"
             )}
+            style={{ color: headerColor }} // Use header color from mapping
           >
             <div
               style={{ fontSize: ratingFontSize }}
@@ -370,39 +463,24 @@ const PlayerCard = ({
               fontSize: playStyleFontSize,
             }}
           >
-            {playstyle_plus.map((playstyle) => {
-              return (
-                <div className="relative">
-                  <svg
-                    className={classNames(
-                      " svg-container svg-icon svg-icon--size-sm",
-                      isMini ? "!w-[2em] !h-[2em]" : "!w-[2.5em] !h-[2.5em] "
-                    )}
-                    role="img"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 256 256"
-                    stroke={textColor}
-                  >
-                    <path
-                      d="M12.813,104.953L68.157,21.862H188.143l55.045,83.091L128,235.138Z"
-                      fill-opacity="1"
-                      stroke={textColor}
-                      stroke-linejoin="round"
-                      stroke-width="8"
-                      fill={bgColor}
-                    ></path>
-                  </svg>
-                  <div className="playstyle_icon">
-                    {getTraitIcon(playstyle, textColor)}
-                  </div>
-                </div>
-              );
-            })}
+            {playstyle_plus.map((playstyle) => (
+              <PlaystyleIcon
+                key={playstyle}
+                playstyle={playstyle}
+                iconColor={playStyleIconColor}
+                bgColor={bgColor}
+                strokeColor={playStyleIconColor}
+                isMini={isMini}
+              />
+            ))}
           </div>
           {/* ALternate Positions */}
           {!isMini && (
             <div
-              style={{ fontSize: skillMovesFontSize }}
+              style={{
+                fontSize: skillMovesFontSize,
+                color: attributeColor, // Use attribute color for alternate positions
+              }}
               className={classNames(
                 "absolute right-[3.96%] top-[28.1%] transform -translate-y-1/2 z-2 text-center flex flex-col gap-[0.1em] "
               )}
@@ -410,9 +488,11 @@ const PlayerCard = ({
               {position.slice(1).map((pos) => (
                 <div
                   key={pos}
-                  className={`rounded-[0.35em] px-1 font-medium border-[0.09em] border-[--color] text-[--color] w-full whitespace-nowrap font-cruyff-condensed-medium  flex justify-center leading-[1] pb-[0.04em]  relative`}
+                  className={`rounded-[0.35em] px-1 font-medium border-[0.09em] border-[--attribute-color] text-[--attribute-color] w-full whitespace-nowrap font-cruyff-condensed-medium  flex justify-center leading-[1] pb-[0.04em]  relative`}
                   style={{
                     backgroundColor: bgColor,
+                    borderColor: attributeColor,
+                    color: attributeColor,
                   }}
                 >
                   {pos}
@@ -422,32 +502,40 @@ const PlayerCard = ({
           )}
           {!isMini && (
             <div
-              style={{ fontSize: skillMovesFontSize }}
+              style={{
+                fontSize: skillMovesFontSize,
+                color: attributeColor, // Use attribute color for skill moves and weak foot
+              }}
               className={classNames(
                 "absolute font-bold right-[3.96%] top-[58.2%] transform -translate-y-1/2 z-2  text-center flex flex-col gap-[0.1em] "
               )}
             >
               <div
                 className={classNames(
-                  "p-[0.1em]  rounded-[0.35em] bg-[--fill-color] border-[0.09em] border-[--color] text-[--color] w-full whitespace-nowrap font-cruyff-condensed-medium  flex justify-center leading-[1]  relative",
+                  "p-[0.1em]  rounded-[0.35em] bg-[--fill-color] border-[0.09em] border-[--attribute-color] text-[--attribute-color] w-full whitespace-nowrap font-cruyff-condensed-medium  flex justify-center leading-[1]  relative",
                   statDifference?.[7] > 0 ? "text-green-600" : ""
                 )}
+                style={{
+                  backgroundColor: bgColor,
+                  borderColor: attributeColor,
+                  color: statDifference?.[7] > 0 ? "#16a34a" : attributeColor,
+                }}
               >
                 {shouldAddStatDifference && statDifference?.[7] > 0
                   ? skill_moves + statDifference[7]
                   : skill_moves}{" "}
                 ★
-                {/* {statDifference?.[7] > 0 && (
-                  <span className="text-xs absolute -bottom-3 left-1">
-                    +{statDifference[7]}
-                  </span>
-                )} */}
               </div>
               <div
                 className={classNames(
-                  "p-[0.1em] rounded-[0.35em] bg-[--fill-color] border-[0.09em] border-[--color] text-[--color] w-full whitespace-nowrap font-cruyff-condensed-medium  flex justify-center leading-[1]  relative",
+                  "p-[0.1em] rounded-[0.35em] bg-[--fill-color] border-[0.09em] border-[--attribute-color] text-[--attribute-color] w-full whitespace-nowrap font-cruyff-condensed-medium  flex justify-center leading-[1]  relative",
                   statDifference?.[8] > 0 ? "text-green-600" : ""
                 )}
+                style={{
+                  backgroundColor: bgColor,
+                  borderColor: attributeColor,
+                  color: statDifference?.[8] > 0 ? "#16a34a" : attributeColor,
+                }}
               >
                 {shouldAddStatDifference && statDifference?.[8] > 0
                   ? weak_foot + statDifference[8]
@@ -469,16 +557,16 @@ const PlayerCard = ({
             )}
           >
             <img
-              src={buildDynamicUrl("nation", nation)}
-              class={classNames(
+              src={buildDynamicUrl("nation", nation, useLightCrest)}
+              className={classNames(
                 "object-contain",
                 isMini || isSuperMini ? "max-w-[15%]" : "max-w-[10%]"
               )}
               alt="Nation"
             />
             <img
-              src={buildDynamicUrl("league", leagueid)}
-              class={classNames(
+              src={buildDynamicUrl("league", leagueid, useLightCrest)}
+              className={classNames(
                 "object-contain",
                 isMini || isSuperMini ? "max-w-[15%]" : "max-w-[10%]"
               )}
@@ -486,8 +574,8 @@ const PlayerCard = ({
             />
 
             <img
-              src={buildDynamicUrl("club", teamid)}
-              class={classNames(
+              src={buildDynamicUrl("club", teamid, useLightCrest)}
+              className={classNames(
                 "object-contain",
                 isMini || isSuperMini ? "max-w-[15%]" : "max-w-[10%]"
               )}

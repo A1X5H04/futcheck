@@ -109,7 +109,7 @@ const CustomTooltip = ({ active, payload, label, selectedLeagueId }) => {
               style={{ color: entry.color }}
             >
               <img
-                src={buildDynamicUrl("nation", entry.name)}
+                src={buildDynamicUrl("nation", entry.name, "dark")}
                 className="w-6 h-4 mr-2"
               />
               <div className="flex items-center ml-2 gap-1 text-gray-300">

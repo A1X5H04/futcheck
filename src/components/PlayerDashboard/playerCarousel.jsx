@@ -14,6 +14,7 @@ import { EffectCoverflow, Pagination } from "swiper/modules";
 import PlayerCard from "../common/PlayerCard";
 import { useSelector } from "react-redux";
 import { buildDynamicUrl } from "../utils/utils";
+import PlaystyleIcon from "../common/PlaystyleIcon";
 
 export default function PlayerCarousel({
   playerDetails,
@@ -66,57 +67,27 @@ export default function PlayerCarousel({
         </Swiper>
       </div>
       <div className="flex gap-3 justify-center flex-wrap scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-slate-700 scrollbar-track-slate-300">
-        {iconPlaystyles?.map((playstyle) => {
-          return (
-            <div className="relative">
-              <svg
-                class="!w-[2.5em] !h-[2.5em] svg-container svg-icon svg-icon--size-sm"
-                role="img"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 256 256"
-              >
-                <path
-                  d="M12.813,104.953L68.157,21.862H188.143l55.045,83.091L128,235.138Z"
-                  fill-opacity="1"
-                  stroke="#FFD700"
-                  stroke-linejoin="round"
-                  stroke-width="8"
-                  fill="#FFD700"
-                ></path>
-              </svg>
-              <img
-                className="w-[35px] h-[35px] absolute left-[2px] top-0"
-                src={buildDynamicUrl("playstyle", playstyle)}
-              />
-            </div>
-          );
-        })}
+        {iconPlaystyles?.map((playstyle) => (
+          <PlaystyleIcon
+            key={playstyle}
+            playstyle={playstyle}
+            iconColor="#000000"
+            bgColor="#FFD700"
+            strokeColor="#FFD700"
+            isMini={false}
+          />
+        ))}
 
-        {playstyles?.map((playstyle) => {
-          return (
-            <div className="relative">
-              <svg
-                class="!w-[2.5em] !h-[2.5em] svg-container svg-icon svg-icon--size-sm"
-                role="img"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 256 256"
-              >
-                <path
-                  d="M12.813,104.953L68.157,21.862H188.143l55.045,83.091L128,235.138Z"
-                  fill-opacity="1"
-                  stroke="#ffffff"
-                  stroke-linejoin="round"
-                  stroke-width="8"
-                  fill="#ffffff"
-                ></path>
-              </svg>
-              <img
-                className="w-[35px] h-[35px] absolute left-[2px] top-0"
-                src={buildDynamicUrl("playstyle", playstyle)}
-              />
-            </div>
-          );
-        })}
+        {playstyles?.map((playstyle) => (
+          <PlaystyleIcon
+            key={playstyle}
+            playstyle={playstyle}
+            iconColor="#000000"
+            bgColor="#ffffff"
+            strokeColor="#ffffff"
+            isMini={false}
+          />
+        ))}
       </div>
       <div className="text-3xl font-black">{player["name"]}</div>
     </div>

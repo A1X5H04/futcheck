@@ -35,7 +35,7 @@ const PlaystyleCard = ({ playstyles = [], iconPlaystyles = [] }) => {
               </svg>
               <img
                 className="w-[35px] h-[35px] absolute left-[2px] top-0"
-                src={buildDynamicUrl('playstyle',playstyle)}
+                src={buildDynamicUrl("traits", playstyle)}
               />
             </div>
           );
@@ -61,7 +61,7 @@ const PlaystyleCard = ({ playstyles = [], iconPlaystyles = [] }) => {
               </svg>
               <img
                 className="w-[35px] h-[35px] absolute left-[2px] top-0"
-                src={buildDynamicUrl('playstyle',playstyle)}
+                src={buildDynamicUrl("traits", playstyle)}
               />
             </div>
           );

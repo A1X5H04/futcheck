@@ -81,7 +81,7 @@ export const TraitComponent = ({ value }) => {
       </svg>
       <img
         className="w-[35px] h-[35px] absolute left-[2px] top-0"
-        src={buildDynamicUrl("playstyle", traidId)}
+        src={buildDynamicUrl("traits", traidId)}
         alt="trait"
       />
     </div>

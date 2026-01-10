@@ -102,7 +102,10 @@ export const buildPlayerUrl = (guId, eaId, baseId) => {
   // return `${BASE_URL}/player//${guId}/p${eaId}.png`;
 };
 
-export const buildDynamicUrl = (type, id) => {
+export const buildDynamicUrl = (type, id, mode) => {
+  if (mode) {
+    return `${BASE_URL}/${type}/${mode}/${id}.png`;
+  }
   return `${BASE_URL}/${type}/${id}.png`;
 };
 
