@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import FootballPitchImg from "../../assets/football_pitch_squad_builder_night.jpg";
-import Formation from "./formation";
+// import Formation from "./formation";
 import { fetchBestSquad, fetchBestSquadClub } from "../../api/apiService";
 import { useSelector } from "react-redux";
 const SquadBuilder = () => {

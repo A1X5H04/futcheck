@@ -10,7 +10,7 @@ import DynamicRangeSlider from "./DynamicRangeSlider";
 import { formatNumber } from "./squadUtils";
 import SquadRequirements, {
   ConstraintTypes,
-  OperationTypes,
+  // OperationTypes,
 } from "./SquadRequirements";
 import playerCache from "../utils/playerCache";
 import wasmSquadBuilder from "../utils/wasmSquadBuilder";
