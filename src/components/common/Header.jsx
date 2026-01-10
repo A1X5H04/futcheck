@@ -252,7 +252,7 @@ const Navbar = () => {
                   <img
                     alt=""
                     className="w-5"
-                    src={`${process.env.REACT_APP_CDN_BASE_URL}/misc/sbc.webp`}
+                    src={`${import.meta.env.VITE_CDN_BASE_URL}/misc/sbc.webp`}
                   />
                   <div className="text-white font-bold">SBCs</div>
                 </div>
@@ -280,7 +280,7 @@ const Navbar = () => {
 
               {/* Premium CTA or GOLD badge */}
               {userInfo?.is_premium ||
-              (userInfo?.membership_level || "").toLowerCase() === "gold" ? (
+                (userInfo?.membership_level || "").toLowerCase() === "gold" ? (
                 <span className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-yellow-400 text-black font-extrabold tracking-wide shadow-md">
                   <img
                     src={`${process.env.REACT_APP_CDN_BASE_URL}/misc/crown.webp`}

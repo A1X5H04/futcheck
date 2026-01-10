@@ -4,14 +4,14 @@ const GoogleAnalytics = () => {
   useEffect(() => {
     // Add Google AdSense script
     const adsenseScript = document.createElement("script");
-    adsenseScript.src = `${process.env.REACT_APP_GOOGLE_ADSENSE_URL}?client=${process.env.REACT_APP_GOOGLE_ADSENSE_ACCOUNT}`;
+    adsenseScript.src = `${import.meta.env.VITE_GOOGLE_ADSENSE_URL}?client=${import.meta.env.VITE_GOOGLE_ADSENSE_ACCOUNT}`;
     adsenseScript.async = true;
     adsenseScript.crossOrigin = "anonymous";
     document.head.appendChild(adsenseScript);
 
     // Add Google Tag Manager script
     const gtmScript = document.createElement("script");
-    gtmScript.src = `${process.env.REACT_APP_GOOGLE_TAG_MANAGER_URL}?id=${process.env.REACT_APP_GOOGLE_ANALYTICS_ID}`;
+    gtmScript.src = `${import.meta.env.VITE_GOOGLE_TAG_MANAGER_URL}?id=${import.meta.env.VITE_GOOGLE_ANALYTICS_ID}`;
     gtmScript.async = true;
     document.head.appendChild(gtmScript);
 
@@ -22,7 +22,7 @@ const GoogleAnalytics = () => {
     }
     window.gtag = gtag;
     gtag("js", new Date());
-    gtag("config", process.env.REACT_APP_GOOGLE_ANALYTICS_ID);
+    gtag("config", import.meta.env.VITE_GOOGLE_ANALYTICS_ID);
 
     // Cleanup function
     return () => {
