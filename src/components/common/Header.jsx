@@ -283,7 +283,7 @@ const Navbar = () => {
                 (userInfo?.membership_level || "").toLowerCase() === "gold" ? (
                 <span className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-yellow-400 text-black font-extrabold tracking-wide shadow-md">
                   <img
-                    src={`${process.env.REACT_APP_CDN_BASE_URL}/misc/crown.webp`}
+                    src={`${import.meta.env.VITE_CDN_BASE_URL}/misc/crown.webp`}
                     alt=""
                     className="w-4 h-4"
                     onError={(e) => (e.currentTarget.style.display = "none")}

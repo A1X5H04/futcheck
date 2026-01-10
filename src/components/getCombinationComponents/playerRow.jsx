@@ -33,7 +33,7 @@ const PlayerRow = ({ player }) => {
         >
           <img
             className="absolute top-1/2 -translate-y-1/2"
-            src={`${process.env.REACT_APP_EA_BASE_URL}/items/images/mobile/portraits/${base_id}.png`}
+            src={`${import.meta.env.VITE_EA_BASE_URL}/items/images/mobile/portraits/${base_id}.png`}
             width={40}
           />
         </div>
@@ -48,7 +48,7 @@ const PlayerRow = ({ player }) => {
               <img src={league_url} className="w-3 h-3" />
               <img
                 className="w-3 h-3"
-                src={`${process.env.REACT_APP_EA_BASE_URL}/items/images/mobile/clubs/dark/${teamid}.png`}
+                src={`${import.meta.env.VITE_EA_BASE_URL}/items/images/mobile/clubs/dark/${teamid}.png`}
               />
             </div>
           </div>
