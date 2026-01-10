@@ -1,4 +1,3 @@
-import React from "react";
 import Header from "./components/common/Header";
 import store from "./redux/store";
 import { Provider } from "react-redux";
@@ -12,7 +11,6 @@ import {
 } from "react-router-dom";
 
 import ReactGA from "react-ga4";
-import Ads from "./components/common/Ads";
 import Tos from "./components/tos";
 import Policy from "./components/policy";
 import ErrorBoundary from "./ErrorBoundary";
@@ -37,7 +35,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import GoogleAnalytics from "./GoogleAnalytics";
 
-ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_ID);
+ReactGA.initialize(import.meta.env.VITE_GOOGLE_ANALYTICS_ID);
 
 const queryClient = new QueryClient();
 
@@ -57,7 +55,7 @@ function App() {
       <ErrorBoundary>
         <Provider store={store}>
           <GoogleOAuthProvider
-            clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}
+            clientId={import.meta.env.VITE_GOOGLE_OAUTH_CLIENT_ID}
           >
             <QueryClientProvider client={queryClient}>
               <div className="App scrollbar-thin">
@@ -65,7 +63,7 @@ function App() {
                 {/* <Ads adClient={process.env.REACT_APP_GOOGLE_ADSENSE_ACCOUNT} adSlot={process.env.REACT_APP_GOOGLE_ADSENSE_SLOT} /> */}
                 <Routes>
                   {/* <Route exact path="/" element={<HomePage />} /> */}
-                  <Route exact path="/" element={<NewHomePage />} />
+                  <Route index path="/" element={<NewHomePage />} />
                   {/* <Route
                       exact
                       path="/new_homepage"
@@ -120,7 +118,7 @@ function App() {
 const Root = () => (
   <PayPalScriptProvider
     options={{
-      "client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID,
+      clientId: import.meta.env.VITE_PAYPAL_CLIENT_ID,
       currency: "USD",
       components: "buttons",
       "enable-funding": "card,venmo",
