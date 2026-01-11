@@ -8,7 +8,7 @@ import React, {
   useEffect,
 } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { setPlayer } from "../../redux/playerSlice";
 import PlayerCard from "../common/PlayerCard";
 import CoinsImg from "../../assets/coins.png";
@@ -169,9 +169,8 @@ const PlayerSwiper = forwardRef(({ players, selectedTab }, ref) => {
               {player?.latest_price?.toLocaleString("en-us")}
               {player?.trend && (
                 <span
-                  className={`${
-                    player?.trend < 0 ? "text-red-500" : "text-green-500"
-                  } font-mono md:text-lg text-xs`}
+                  className={`${player?.trend < 0 ? "text-red-500" : "text-green-500"
+                    } font-mono md:text-lg text-xs`}
                 >
                   {player?.trend > 0 ? "+" : ""}
                   {player?.trend}%

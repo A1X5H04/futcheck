@@ -28,7 +28,7 @@ import {
 } from "./EvolutionUtils";
 import { useSelector } from "react-redux";
 import { useHandleResize } from "../utils/hooks";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 const getComponentByType = (type) => {
   switch (type) {
@@ -216,8 +216,8 @@ const EvolutionCard = ({ data }) => {
                 {endTimePurchaseVisibility == 0
                   ? "No Expiry"
                   : !endTimePurchaseVisibility
-                  ? "Expired"
-                  : getTimeUntilExpiration(endTimePurchaseVisibility)}
+                    ? "Expired"
+                    : getTimeUntilExpiration(endTimePurchaseVisibility)}
               </span>
             </div>
             <div className="flex flex-col">
@@ -226,8 +226,8 @@ const EvolutionCard = ({ data }) => {
                 {endTime == 0
                   ? "No Expiry"
                   : !endTimeStamp
-                  ? "Expired"
-                  : getTimeUntilExpiration(endTimeStamp)}
+                    ? "Expired"
+                    : getTimeUntilExpiration(endTimeStamp)}
               </span>
             </div>
             <div className="flex gap-4 absolute bottom-2 right-2">

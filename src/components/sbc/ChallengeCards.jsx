@@ -4,7 +4,7 @@ import {
   convertElgReqToFormat,
   convertElgReqToStrings,
 } from "../utils/utils";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { useDispatch } from "react-redux";
 import { setChallenge } from "../../redux/sbcSlice";
 
@@ -15,7 +15,7 @@ const ChallengeCard = ({ challengeDetails }) => {
     description,
     cost,
     eligibilityRequirements,
-    
+
   } = challengeDetails;
 
   const dispatch = useDispatch();
@@ -40,7 +40,7 @@ const ChallengeCard = ({ challengeDetails }) => {
           <a href="/24/squad-builder/5bedfe18-5eec-452f-a645-9d48b236fe1e/">
             {" "}
             <img
-              src={buildDynamicUrl('challenge',challengeId)}
+              src={buildDynamicUrl('challenge', challengeId)}
               alt="89 Rated Squad"
               loading="lazy"
             />

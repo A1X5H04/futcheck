@@ -19,7 +19,7 @@ import {
   MagnifyingGlassIcon,
 } from "@heroicons/react/20/solid";
 import { useDebounce } from "@uidotdev/usehooks";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 const AllPlayers = ({ isHome = false }) => {
   const filters = useSelector((state) => state.allPlayers.filters);

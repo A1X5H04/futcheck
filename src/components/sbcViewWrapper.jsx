@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { setSbc } from "../redux/sbcSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import { fetchSbcDetails } from "../api/apiService";
 import SbcView from "./sbc/SbcView";
 

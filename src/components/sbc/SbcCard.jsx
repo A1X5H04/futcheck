@@ -4,7 +4,7 @@ import {
   getTimeUntilExpiration,
   timeAgo,
 } from "../utils/utils";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 const SbcCard = ({ data }) => {
   const {
@@ -92,8 +92,8 @@ const SbcCard = ({ data }) => {
                   {endTime == 0
                     ? "No Expiry"
                     : !endTimeStamp
-                    ? "Expired"
-                    : getTimeUntilExpiration(endTimeStamp)}
+                      ? "Expired"
+                      : getTimeUntilExpiration(endTimeStamp)}
                 </span>
               </div>
               <div

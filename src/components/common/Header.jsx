@@ -12,7 +12,7 @@ import {
 } from "../../api/apiService";
 import { useDebounce } from "@uidotdev/usehooks";
 import FutcheckLogo from "../../assets/football logo 5.png";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import {
   AcademicCapIcon,
   Bars3Icon,

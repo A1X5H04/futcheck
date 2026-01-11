@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { useDispatch } from "react-redux";
 import { removeUserInfo } from "../../redux/appSlice";
 import { deleteCookie } from "../utils/cookies";
@@ -30,9 +30,8 @@ const MobileMenuPopover = ({ userInfo, onOpenLogin, onOpenPremium }) => {
         {userInfo ? (
           <div className="flex items-center gap-3">
             <div
-              className={`p-0.5 rounded-full border-2 ${
-                isGold ? "border-yellow-400" : "border-fuchsia-400"
-              }`}
+              className={`p-0.5 rounded-full border-2 ${isGold ? "border-yellow-400" : "border-fuchsia-400"
+                }`}
             >
               {userInfo.picture_url ? (
                 <img

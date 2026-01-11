@@ -8,7 +8,7 @@ import {
 import FOOTBALL_STADIUM_IMAGE from "../../assets/sbc_background_field.webp";
 
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import SolutionsPitch from "../../assets/updated-field.png";
 import { useQuery } from "@tanstack/react-query";
 import PlayerCard from "../common/PlayerCard";

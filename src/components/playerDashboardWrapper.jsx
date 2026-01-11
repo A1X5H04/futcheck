@@ -3,7 +3,7 @@ import PlayerDashboard from "./PlayerDashboard/playerDashboard";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPlayerDetails } from "../api/apiService";
 import { setPlayer } from "../redux/playerSlice";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 
 const PlayerDashboardWrapper = () => {
   const { playerId } = useParams();

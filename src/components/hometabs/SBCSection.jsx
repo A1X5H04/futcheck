@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import MarqueeSbcCard from "../common/MarqueeSbcCard";
 import NewSbcCard from "../sbc/NewSbcCard";
 import MY_CLUB_BG from "../../assets/my_club_background.webp";
