@@ -5,7 +5,7 @@ import {
   // setidUntilExpiration,
   timeAgo,
 } from "../utils/utils";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import CoinsImg from "../../assets/coins.png";
 import PlayerRewardWrapper from "./PlayerRewardWrapper";
 import { useHandleResize } from "../utils/hooks";

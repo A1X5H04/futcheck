@@ -23,5 +23,10 @@ dist-ssr
 *.sln
 *.sw?
 
+# Lock files
+yarn.lock
+pnpm-lock.yaml
+package-lock.json
+
 # Misc directories and files
 old-cra-project

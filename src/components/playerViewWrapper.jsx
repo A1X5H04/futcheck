@@ -3,7 +3,7 @@ import PlayerView from "./playerView";
 import { fetchPlayerDetails } from "../api/apiService";
 import { useDispatch, useSelector } from "react-redux";
 import { setPlayer } from "../redux/playerSlice";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 
 const PlayerViewWrapper = () => {
   const { playerId } = useParams();

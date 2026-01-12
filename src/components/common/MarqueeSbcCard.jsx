@@ -4,7 +4,7 @@ import {
   getTimeUntilExpiration,
   timeAgo,
 } from "../utils/utils";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import CoinsImg from "../../assets/coins.png";
 
 const MarqueeSbcCard = ({ data }) => {
@@ -36,8 +36,8 @@ const MarqueeSbcCard = ({ data }) => {
                   {endTime == 0
                     ? "No Expiry"
                     : !endTimeStamp
-                    ? "Expired"
-                    : getTimeUntilExpiration(endTimeStamp)}
+                      ? "Expired"
+                      : getTimeUntilExpiration(endTimeStamp)}
                 </span>
               </div>
               <div className="flex flex-col">

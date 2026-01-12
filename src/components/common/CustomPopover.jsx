@@ -10,7 +10,7 @@ import {
   getBgColor,
   getTextColor,
 } from "../utils/utils";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { isHero, isIcon } from "../squadWizard/squadUtils";
 
 const PopoverItems = ({ closePanel, player }) => {
@@ -36,27 +36,27 @@ const PopoverItems = ({ closePanel, player }) => {
   const rarityObject = rarities.find((r) => r.id === rarity);
   const rarity_url = rarityObject
     ? buildRarityUrl({
-        level: rarityObject.levels || 0,
-        rating: rating,
-        id: rarity,
-      })
+      level: rarityObject.levels || 0,
+      rating: rating,
+      id: rarity,
+    })
     : "";
   const textColor = rarityObject
     ? getTextColor({
-        colors: rarityObject.colors,
-        rating: rating,
-        level: rarityObject.levels || 0,
-        indices: rarityObject.lg_color_indices || [],
-      })
+      colors: rarityObject.colors,
+      rating: rating,
+      level: rarityObject.levels || 0,
+      indices: rarityObject.lg_color_indices || [],
+    })
     : "#ffffff";
 
   const bgColor = rarityObject
     ? getBgColor({
-        colors: rarityObject.colors,
-        rating: rating,
-        level: rarityObject.levels || 0,
-        indices: rarityObject.lg_color_indices || [],
-      })
+      colors: rarityObject.colors,
+      rating: rating,
+      level: rarityObject.levels || 0,
+      indices: rarityObject.lg_color_indices || [],
+    })
     : "#ffffff";
   const handleClick = () => {
     player["bg_color"] = fillZeros(player["bg_color"]);

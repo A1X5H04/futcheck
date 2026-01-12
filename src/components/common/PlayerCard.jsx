@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { setPlayer } from "../../redux/playerSlice";
 import {
   buildDynamicUrl,
@@ -185,8 +185,8 @@ const PlayerCard = ({
   const player_name = c_name
     ? c_name
     : isMini
-    ? displayName?.split(" ")?.pop()
-    : displayName;
+      ? displayName?.split(" ")?.pop()
+      : displayName;
   const selectedChemStyle = useSelector(
     (state) => state.player.selectedChemStyle
   );
@@ -216,25 +216,25 @@ const PlayerCard = ({
 
   const rarity_url = rarityObject
     ? buildRarityUrl({
-        level: rarityObject.levels || 0,
-        rating: rating,
-        id: rarity,
-      })
+      level: rarityObject.levels || 0,
+      rating: rating,
+      id: rarity,
+    })
     : "";
 
   // Get color mappings using the new system
   const colorMappings = rarityObject
     ? getColorMappings(rarityObject, rating)
     : {
-        attributeValues: "#ffffff",
-        background: "#ffffff",
-        dividers: "#ffffff",
-        footer: "#ffffff",
-        header: "#ffffff",
-        name: "#ffffff",
-        playStyleIcon: "#ffffff",
-        playStyleText: "#ffffff",
-      };
+      attributeValues: "#ffffff",
+      background: "#ffffff",
+      dividers: "#ffffff",
+      footer: "#ffffff",
+      header: "#ffffff",
+      name: "#ffffff",
+      playStyleIcon: "#ffffff",
+      playStyleText: "#ffffff",
+    };
 
   // Use the appropriate colors from mappings
   const textColor = colorMappings.name; // Main text color for player name
@@ -550,10 +550,10 @@ const PlayerCard = ({
               isSuperMini
                 ? "flex-col items-end   bg-opacity-10 top-[8%] right-[8%] py-2"
                 : isMini
-                ? `flex-col items-end  bg-opacity-10 top-[10.8%] right-[10%] py-4`
-                : isAllPlayers
-                ? "top-[82.8%] w-full"
-                : "top-[82.8%] w-full"
+                  ? `flex-col items-end  bg-opacity-10 top-[10.8%] right-[10%] py-4`
+                  : isAllPlayers
+                    ? "top-[82.8%] w-full"
+                    : "top-[82.8%] w-full"
             )}
           >
             <img
