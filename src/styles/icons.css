@@ -1,0 +1,12 @@
+.fc-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    background-image: var(--fc-icon-url);
+    background-size: contain;
+}
+
+.icon-coin {
+    --fc-icon-url: url('../assets/coins.png');
+}

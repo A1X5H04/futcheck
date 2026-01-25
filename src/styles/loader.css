@@ -1,0 +1,59 @@
+/* Overlay loader css */
+/* src/components/common/overlay-loader.tsx */
+
+#fb-loader__svg {
+    path {
+        animation-duration: 1s;
+        animation-name: pulse-loader;
+        animation-iteration-count: infinite;
+    }
+
+    #path_7 {
+        animation-delay: -1s;
+    }
+
+    #path_6 {
+        animation-delay: -875ms;
+    }
+
+    #path_5 {
+        animation-delay: -750ms;
+    }
+
+    #path_4 {
+        animation-delay: -625ms;
+    }
+
+    #path_3 {
+        animation-delay: -500ms;
+    }
+
+    #path_2 {
+        animation-delay: -375ms;
+    }
+
+    #path_1 {
+        animation-delay: -250ms;
+    }
+
+    #path_0 {
+        animation-delay: -125ms;
+    }
+}
+
+
+
+/* Keyframes here */
+@keyframes pulse-loader {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
