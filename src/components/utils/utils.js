@@ -5,7 +5,7 @@ import { verifyToken } from "../../api/apiService";
 import { setCookie, getCookie } from "./cookies";
 
 // utils.js
-import store from "../../redux/store";
+import store from "../../lib/store";
 import {
   ACADEMY_REQUIREMENTS,
   RARITY,
