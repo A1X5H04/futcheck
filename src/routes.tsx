@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router";
 import RootLayout from "./pages/layout";
-import NewHomePage from "./components/NewHomePage";
 import MarketWrapper from "./components/MarketWrapper";
 import Tos from "./components/tos";
 import EvolutionsWrapper from "./components/EvolutionsWrapper";
@@ -20,6 +19,10 @@ import AllPlayersWrapper from "./components/allPlayersWrapper";
 import { loggingMiddleware } from "./middlewares";
 import RootErrorPage from "./pages/error";
 
+import HomePage from "./pages/home";
+import { homeLoader } from "./loaders/home.loader";
+import PlayersPage from "./pages/players";
+
 export default createBrowserRouter([
     {
         Component: RootLayout,
@@ -28,7 +31,8 @@ export default createBrowserRouter([
         children: [
             {
                 index: true,
-                Component: NewHomePage,
+                Component: HomePage,
+                loader: homeLoader
             },
             {
                 path: "market",
@@ -92,6 +96,10 @@ export default createBrowserRouter([
             },
             {
                 path: "players",
+                Component: PlayersPage,
+            },
+            {
+                path: "players_old",
                 Component: AllPlayersWrapper,
             },
         ]
