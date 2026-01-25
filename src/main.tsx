@@ -1,14 +1,14 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { RouterProvider } from 'react-router/dom'
-import router from './routes'
-import { Provider } from 'react-redux'
-import store from './redux/store.js'
-import './index.css'
 import { PayPalScriptProvider } from '@paypal/react-paypal-js'
 import { GoogleOAuthProvider } from '@react-oauth/google'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { RouterProvider } from 'react-router/dom'
+
+import { Provider } from 'react-redux'
+import store from './lib/store'
+import router from './routes'
+import './styles/index.css'
 
 const queryClient = new QueryClient();
 
