@@ -1,0 +1,196 @@
+.hero-carousel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 2rem 1rem 3rem;
+}
+
+
+.hero-carousel__viewport {
+    position: relative;
+    flex: 1;
+    width: 100%;
+    max-width: calc(100vw - 120px);
+}
+
+.embla {
+    overflow: hidden;
+
+    mask-image: linear-gradient(to right,
+            transparent 0%,
+            rgba(0, 0, 0, 0.3) 5%,
+            black 15%,
+            black 85%,
+            rgba(0, 0, 0, 0.3) 95%,
+            transparent 100%);
+    -webkit-mask-image: linear-gradient(to right,
+            transparent 0%,
+            rgba(0, 0, 0, 0.3) 5%,
+            black 15%,
+            black 85%,
+            rgba(0, 0, 0, 0.3) 95%,
+            transparent 100%);
+}
+
+.embla__container {
+    display: flex;
+    align-items: center;
+    backface-visibility: hidden;
+    touch-action: pan-y pinch-zoom;
+}
+
+.embla__slide {
+    flex: 0 0 250px;
+    min-width: 0;
+    padding: 0 0.5rem;
+}
+
+.embla__slide-inner {
+    transform: scale(0.8);
+    opacity: 0.4;
+    filter: brightness(0.6) blur(1px);
+    transition: all 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+    will-change: transform, opacity, filter;
+}
+
+.embla__slide.is-snapped .embla__slide-inner {
+    transform: scale(1);
+    opacity: 1;
+    filter: brightness(1) blur(0);
+}
+
+.embla__slide.is-in-view:not(.is-snapped) .embla__slide-inner {
+    opacity: 0.5;
+    filter: brightness(0.7) blur(0.5px);
+}
+
+.hero-carousel__arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    flex-shrink: 0;
+}
+
+.hero-carousel__arrow:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.9);
+    transform: scale(1.08);
+}
+
+.hero-carousel__arrow:active {
+    transform: scale(0.95);
+}
+
+.hero-carousel__dots {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.hero-carousel__dots--left {
+    order: -1;
+}
+
+.hero-carousel__dots--right {
+    order: 1;
+}
+
+.hero-carousel__dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.hero-carousel__dot:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: scale(1.4);
+}
+
+.hero-carousel__dot--active {
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
+}
+
+.hero-carousel__pagination {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.325rem;
+}
+
+.hero-carousel__pagination-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.hero-carousel__pagination-dot:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.hero-carousel__pagination-dot--active {
+    background: rgba(255, 255, 255, 0.85);
+    transform: scale(1.2);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.25);
+}
+
+@media (max-width: 640px) {
+    .hero-carousel {
+        gap: 0.75rem;
+        padding: 1.5rem 0.5rem 2.5rem;
+    }
+
+    .hero-carousel__arrow {
+        width: 32px;
+        height: 32px;
+    }
+
+    .hero-carousel__dots {
+        display: none;
+    }
+
+    .embla {
+        mask-image: linear-gradient(to right,
+                transparent 0%,
+                black 8%,
+                black 92%,
+                transparent 100%);
+        -webkit-mask-image: linear-gradient(to right,
+                transparent 0%,
+                black 8%,
+                black 92%,
+                transparent 100%);
+    }
+
+    .embla__slide {
+        flex: 0 0 50%;
+    }
+}
